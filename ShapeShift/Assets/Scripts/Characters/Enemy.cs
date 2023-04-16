@@ -12,7 +12,7 @@ public class Enemy : Character
 
     public virtual void Dead()
     {
-        m_Pickable.SpawnPickable(1, transform);
-        Destroy(gameObject);
+        m_Anim.SetTrigger("Dead");
+        Destroy(gameObject, 2f);
     }
 }
