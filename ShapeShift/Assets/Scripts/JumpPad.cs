@@ -16,7 +16,7 @@ public class JumpPad : MonoBehaviour
             hasInteracted = true;
             Player m_PlayerScript = other.GetComponent<Player>();
             m_PlayerScript.CanMove = false;
-            print("Player Entered");
+            //print("Player Entered");
             m_JumpPad.DOBlendableLocalMoveBy(new Vector3(0,0,0), 0.1f).OnComplete(() => {
 
                 other.transform.DOJump(m_destinationPoint.position, 20, 0, 2f).SetEase(Ease.InFlash).OnComplete(() => {

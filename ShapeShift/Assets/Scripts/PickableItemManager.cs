@@ -30,12 +30,14 @@ public class PickableItemManager : MonoBehaviour
         GameObject item;
         for (int i = 0; i < SpawnCount; i++)
         {
-            print("Spawnned");
+            //print("Spawnned");
             item = Instantiate(prefab);
             Coin coin = item.GetComponent<Coin>();
             coin.MovetoPlayerWithDelay(m_Player);
-            item.transform.position = _SpawnPosition;
-            item.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), Random.Range(-5, 5)) , ForceMode.Impulse);
+            item.transform.position = _SpawnPosition + new Vector3(0, 5,0);
+            Rigidbody rb = item.GetComponent<Rigidbody>();
+            rb.isKinematic = false;
+            rb.AddForce(new Vector3(Random.Range(-5, 5), Random.Range(0, 15), Random.Range(-5, 5)) , ForceMode.Impulse);
             yield return new WaitForSeconds(0.05f);
         }
     }

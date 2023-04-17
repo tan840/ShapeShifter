@@ -11,7 +11,7 @@ public class Player : Character
 {
     [SerializeField] float m_RotationSpeed = 10;
     [SerializeField] bool m_CanMove;
-
+    [SerializeField] bool m_GameStarted;
 
     [SerializeField] AudioSource Slash;
 
@@ -29,9 +29,9 @@ public class Player : Character
         base.OnTriggerEnter(other);
         if (other.gameObject.CompareTag("Enemy"))
         {
-            print("Triggered");
+          //  print("Triggered");
             Enemy enemy = other.gameObject.GetComponent<Enemy>();
-            print(enemy);
+            //print(enemy);
             if (enemy.IsDead) return;
             if (enemy.CharacterLevel <= CharacterLevel)
             {
@@ -52,17 +52,36 @@ public class Player : Character
             }
             else
             {
-                //print("PlayerDead");
+                StartCoroutine(DeathSequence());
+                IEnumerator DeathSequence()
+                {
+                    enemy.Attack();
+                    yield return null;
+                    IsDead = true;
+                    m_Anim.SetTrigger("Dead");
+                    //m_Anim.ResetTrigger("Dead");
+                    CanvasManager.Instance.SwitchCanvas(CanvasType.GameOverFail, 2f);
+                }
             }
         }
     }
 
     private void Update()
     {
+        if (isDead) return;
         if (!m_CanMove)
         {
             m_Anim.SetBool("IsRunning", false);
             return;
+        }
+        if (!m_GameStarted)
+        {
+            if (Input.anyKeyDown)
+            {
+                m_GameStarted = true;
+                CanvasManager.Instance.SwitchCanvas(CanvasType.GameScene);
+            }
+
         }
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");

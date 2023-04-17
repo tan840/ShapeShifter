@@ -18,7 +18,7 @@ public class Coin : MonoBehaviour
         yield return new WaitForSeconds(MoveDelay);
         m_collider.isTrigger = true;
         m_Rb.isKinematic = true;
-        print("Move to player");
+        //print("Move to player");
         while (Vector3.Distance(player.transform.position, transform.position) > 0.25f)
         {
             yield return null;

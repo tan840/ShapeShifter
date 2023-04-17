@@ -15,4 +15,9 @@ public class Enemy : Character
         m_Anim.SetTrigger("Dead");
         Destroy(gameObject, 2f);
     }
+    public virtual void Attack()
+    {
+        m_Anim.SetTrigger("Attack");
+        //Destroy(gameObject, 2f);
+    }
 }

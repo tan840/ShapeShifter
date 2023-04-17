@@ -26,7 +26,8 @@ public class Princess : MonoBehaviour
     {
         if (Boss == null && col.gameObject.CompareTag("Player"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            CanvasManager.Instance.SwitchCanvas(CanvasType.GameOverSuccess);
         }
     }
 }
