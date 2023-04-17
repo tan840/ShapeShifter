@@ -17,6 +17,8 @@ public class CanvasManager : MonoBehaviour
 {
     private static CanvasManager _instance;
     CanvasEntity m_currentActiveCanvas;
+    [SerializeField] TMP_Text m_Coin;
+    int m_CoinCount = 0;
     public static CanvasManager Instance
     {
         get
@@ -64,9 +66,14 @@ public class CanvasManager : MonoBehaviour
             SwitchCanvas(CanvasType.StartScene);
             //GameAnalytics.NewProgressionEvent(GAProgressionStatus.Start, LevelController.Instance.ActualLevelNumber.ToString());
         }
-
+        m_Coin.text = 0.ToString();
         //LeanTouch.OnFingerDown += OnFingerDown;
         isGameStarted = false;
+    }
+    public void CoinIncriment()
+    {
+        m_CoinCount++;
+        m_Coin.text = m_CoinCount.ToString();
     }
     void OnFingerDown(LeanFinger Finger)
     {

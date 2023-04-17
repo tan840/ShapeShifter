@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class Player_CamFollower : MonoBehaviour
 {
-
+    
     public Transform Player;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+
+    private void Start()
+    {
+        transform.position = Player.position + new Vector3(0, 10, 0);
+    }
     void Update()
     {
+        //follows the player for rendering map.
         transform.position = new Vector3(transform.position.x,transform.position.y,Player.position.z); 
     }
 }

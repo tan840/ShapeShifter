@@ -24,18 +24,18 @@ public class Player : Character
         base.Start();
         m_CanMove = true;
     }
+
+    //player attack condition
     public override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
         if (other.gameObject.CompareTag("Enemy"))
         {
-          //  print("Triggered");
             Enemy enemy = other.gameObject.GetComponent<Enemy>();
-            //print(enemy);
             if (enemy.IsDead) return;
+            //killing enemy condition
             if (enemy.CharacterLevel <= CharacterLevel)
             {
-                //print("Enemy Killed");
                 Slash.Play();
                 CharacterLevel += enemy.CharacterLevel;
                 text.text = "Level: " + characterLevel.ToString();
@@ -52,6 +52,7 @@ public class Player : Character
             }
             else
             {
+                //player death condition
                 StartCoroutine(DeathSequence());
                 IEnumerator DeathSequence()
                 {
@@ -66,6 +67,7 @@ public class Player : Character
         }
     }
 
+    //player movement part
     private void Update()
     {
         if (isDead) return;

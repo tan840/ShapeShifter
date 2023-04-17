@@ -7,10 +7,10 @@ public class Princess : MonoBehaviour
 
 
     [SerializeField] GameObject Boss;
-    // Start is called before the first frame update
+    EnemyBoss m_bossScript; // xD Hackerman
     void Start()
     {
-        
+        m_bossScript = Boss.GetComponent<EnemyBoss>();
     }
 
     // Update is called once per frame
@@ -23,11 +23,14 @@ public class Princess : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision col)
-    {
-        if (Boss == null && col.gameObject.CompareTag("Player"))
+    {   
+        if (m_bossScript.IsDead && col.gameObject.CompareTag("Player"))
         {
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+         
             CanvasManager.Instance.SwitchCanvas(CanvasType.GameOverSuccess);
+        }else
+        {
+            Debug.Log("not player");
         }
     }
 }
